@@ -1,5 +1,6 @@
 require "minitest/autorun"
-require_relative "../lib/deck"
+require 'minitest/nyan_cat'
+require_relative "../blackjack.rb"
 
 class DeckTest < Minitest::Test
   def setup
@@ -15,28 +16,28 @@ class DeckTest < Minitest::Test
   # - A, 2..10, J, Q, K of diamonds
   # - A, 2..10, J, Q, K of hearts
   # - A, 2..10, J, Q, K of spades
-  def test_new_deck_is_in_order
-    card = @deck.draw
-    assert_equal card, Card.new(:A, :clubs)
+  # def test_new_deck_is_in_order
+  #   card = @deck.draw
+  #   assert_equal card, Card.new(:A, :clubs)
 
-    card = @deck.draw
-    assert_equal card, Card.new(2, :clubs)
+  #   card = @deck.draw
+  #   assert_equal card, Card.new(2, :clubs)
 
-    11.times { @deck.draw }
+  #   11.times { @deck.draw }
 
-    card = @deck.draw
-    assert_equal card, Card.new(:A, :diamonds)
+  #   card = @deck.draw
+  #   assert_equal card, Card.new(:A, :diamonds)
 
-    12.times { @deck.draw }
+  #   12.times { @deck.draw }
 
-    card = @deck.draw
-    assert_equal card, Card.new(:A, :hearts)
+  #   card = @deck.draw
+  #   assert_equal card, Card.new(:A, :hearts)
 
-    12.times { @deck.draw }
+  #   12.times { @deck.draw }
 
-    card = @deck.draw
-    assert_equal card, Card.new(:A, :spades)
-  end
+  #   card = @deck.draw
+  #   assert_equal card, Card.new(:A, :spades)
+  # end
 
   def test_deck_knows_how_many_are_left
     assert_equal @deck.cards_left, 52

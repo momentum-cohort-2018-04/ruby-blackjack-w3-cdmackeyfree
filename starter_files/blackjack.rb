@@ -1,37 +1,58 @@
-# puts "TODO Implement the game of blackjack."
+Suit_array = ["Clubs","Hearts","Spades","Diamonds"]
+Rank_array = ["1","2","3","4","5","6","7","8","9","A", "K", "Q", "J"]
 
-# class Deck
+class Card
+    attr_accessor :rank, :suit, :value
+    
+    @@suit_value = Hash[ Suit_array.each_with_index.to_a ]
+    @@rank_value = Hash[ Rank_array.each_with_index.to_a ]
 
-#     deck_array = [
-#         ["A",11], ["K", 10], ["Q", 10], ["J", 10], [10,10], [9,9], [8,8], [7,7], 
-#         [6,6], [5,5], [4,4],[3,3], [2,2], 
-#         ["A",1], ["K", 10], ["Q", 10], ["J", 10], [10,10], [9,9], [8,8], [7,7], 
-#         [6,6], [5,5], [4,4],[3,3], [2,2],
-#         ["A",1], ["K", 10], ["Q", 10], ["J", 10], [10,10], [9,9], [8,8], [7,7], 
-#         [6,6], [5,5], [4,4],[3,3], [2,2],
-#         ["A",1], ["K", 10], ["Q", 10], ["J", 10], [10,10], [9,9], [8,8], [7,7], 
-#         [6,6], [5,5], [4,4],[3,3], [2,2]
-#     ]
+    def initialize(rank, suit)
+        @rank = rank
+        @suit = suit
+    end
 
-#     def shuffle
-#         # card_index = deck_array.rand(0..deck_array.length)
-#         card_index = deck_array.rand(0..deck_array.length)
-#     end
+    def value 
+        if @rank.to_i.include? 2..9
+            value = @rank
+        elsif @rank == "A"
+            value = 11
+        else @rank == "K" || "Q" || "J"
+            value = 10
+        end
+    end
 
-#     def deal
-#         #calls shuffle to get access the card array via index number from the deck_array
-#         #returns the 2 card array, card_array = deck_array[card_index]
-#         #hand << card_array[0]
-#         #delete card_array[0] from deck_array
-#     end
+    def card_value
+        puts  "#{@rank} of #{@suit} with a value of #{@value}"
+    end
+end
 
-#     def dealer_deal
-#         #calls shuffle to get access the card array via index number from the deck_array
-#         #returns the card array
-#         #hand << card_array[0]
-#         #delete_if[card_array[0]] ???
-#     end
-# end
+class Deck
+    attr_accessor :cards
+
+    def initialize
+        @cards = []
+        Suit_array.each do |suit|
+            Rank_array.each do |rank|
+                @cards << Card.new(rank, suit)
+            end
+        end
+    end
+
+    def shuffle
+        @cards.shuffle!
+    end
+
+    def draw
+        @cards.pop
+    end
+
+    def cards_left
+        @cards.length
+    end
+
+end
+
 
 # class Player
 #     wallet = 100
@@ -73,4 +94,3 @@
 #         #if hand > 21 - bust
 #     end
 # end
-
